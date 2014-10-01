@@ -21,14 +21,14 @@ class Player
   def update
     if m_left
       unless x <= 15
-        @x -= 0.5
+        @x -= 1
       end
     elsif m_right
       unless x >= 1057
-        @x += 0.5
+        @x += 1
       end
     elsif m_rotate_up
-      if @angle <= 0 && @angle >= -90
+      if @angle <= 0 && @angle > -90
         @angle -= 1
       end
     elsif m_rotate_down
@@ -40,7 +40,7 @@ class Player
         @angle += 1
       end
     elsif m_rotate_down_reversed
-      if @angle >= 0 && @angle <= 91
+      if @angle > 0 && @angle <= 91
         @angle -= 1
       end
     end

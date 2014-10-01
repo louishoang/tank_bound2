@@ -27,6 +27,12 @@ class GameWindow < Gosu::Window
   def update
     @player1.update
     @player2.update
+    if button_down? Gosu::Button::KbSpace
+      @bullets1 << @player1.fire(@player1, @player1.x + 6, "img/bullet1.png")
+    end
+    if button_down? Gosu::Button::KbRightShift
+      @bullets2 << @player2.fire(@player2, @player2.x - 25, "img/bullet2.png")
+    end
     @bullets1.each {|bullet| bullet.update}
     @bullets2.each {|bullet| bullet.update}
   end
