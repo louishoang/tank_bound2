@@ -10,6 +10,8 @@ module Keys
       @player1.m_rotate_up = true
     elsif id == Gosu::KbS
       @player1.m_rotate_down = true
+    elsif id == Gosu::KbSpace
+      @bullets1 << @player1.fire(@player1, @player1.x + 6, "img/bullet1.png")
 
     # Button for player_2(girl)
     elsif id == Gosu::KbLeft
@@ -21,6 +23,8 @@ module Keys
       @position = "right"
     elsif id == Gosu::KbDown
       @player2.m_rotate_down_reversed = true
+    elsif id == Gosu::KbRightShift
+      @bullets2 << @player2.fire(@player2, @player2.x - 6, "img/bullet2.png")
     end
   end
 

@@ -1,10 +1,11 @@
 class Player
   attr_accessor :x, :y, :angle, :m_left, :m_right, :m_rotate_up, :m_rotate_down,
-                :m_rotate_up_reversed, :m_rotate_down_reversed
-  def initialize(window, x, y, img)
+                :m_rotate_up_reversed, :m_rotate_down_reversed, :fire, :name
+  def initialize(window, x, y, img, name)
     @window = window
     @x = x
     @y = y
+    @name = name
     @angle = 0
     @icon = Gosu::Image.new(@window, img, true)
     @m_right = false
@@ -43,6 +44,10 @@ class Player
         @angle -= 1
       end
     end
+  end
+
+  def fire(x, y, icon)
+    Bullet.new(@window, x, y, icon)
   end
 
 end
