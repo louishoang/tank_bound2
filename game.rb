@@ -57,6 +57,12 @@ class GameWindow < Gosu::Window
     @bullets2.each {|bullet| bullet.draw}
     @font.draw("#{player1.health}", 100, 100, 1)
     @font.draw("#{player2.health}", 972, 100, 1)
+
+    # Game Over
+    if @player1.health <= 0 || @player2.health <= 0
+      @font.draw("GAME OVER", 300, 400, 100, 2.0, 2.0, 0xffffffff)
+
+    end
   end
 end
 

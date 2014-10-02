@@ -8,12 +8,14 @@ class Player
     @y = y
     @name = name
     @angle = 0
-    @icon = Gosu::Image.new(@window, img, true)
     @m_right = false
     @m_left = false
     @m_rotate_up = false
     @m_rotate_down = false
     @health = 100
+    @icon = Gosu::Image.new(@window, img, true)
+    @beep = Gosu::Sample.new(window, "media/clang.wav")
+    # @missle = Gosu::Sample.new(window, "media/missile.wav")
   end
 
   def draw
@@ -58,6 +60,7 @@ class Player
 
   def minus_health
     @health -= 1
+    @beep.play
   end
 
 end
