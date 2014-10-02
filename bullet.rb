@@ -37,6 +37,5 @@ class Bullet
 
   def draw
     @bullet1_img.draw(@x, @y, 2)
-    @bullet2_img.draw(@x, @y, 2)
   end
 end

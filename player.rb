@@ -1,6 +1,7 @@
 class Player
   attr_accessor :x, :y, :angle, :m_left, :m_right, :m_rotate_up, :m_rotate_down,
-                :m_rotate_up_reversed, :m_rotate_down_reversed, :fire, :name
+                :m_rotate_up_reversed, :m_rotate_down_reversed, :fire, :name,
+                :health
   def initialize(window, x, y, img, name)
     @window = window
     @x = x
@@ -12,6 +13,7 @@ class Player
     @m_left = false
     @m_rotate_up = false
     @m_rotate_down = false
+    @health = 100
   end
 
   def draw
@@ -48,6 +50,14 @@ class Player
 
   def fire(x, y, icon)
     Bullet.new(@window, x, y, icon)
+  end
+
+  def hit_by?(bullet)
+    Gosu::distance(x, y, bullet.x, bullet.y) < 15
+  end
+
+  def minus_health
+    @health -= 1
   end
 
 end
