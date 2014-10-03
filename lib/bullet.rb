@@ -49,4 +49,8 @@ class Bullet
   def alive?
     @alive == true
   end
+
+  def explode(pos_x, pos_y)
+    Explosion.new(@window, pos_x, pos_y)
+  end
 end

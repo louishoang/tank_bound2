@@ -75,4 +75,8 @@ class Player
       false
     end
   end
+
+  def alive?
+    @health > 0
+  end
 end
