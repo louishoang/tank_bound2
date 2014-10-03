@@ -1,4 +1,7 @@
+require_relative 'bounding_box'
+
 class Player
+  include BoundingBox
   attr_accessor :x, :y, :angle, :m_left, :m_right, :m_rotate_up, :m_rotate_down,
                 :m_rotate_up_reversed, :m_rotate_down_reversed, :fire, :name,
                 :health
@@ -16,6 +19,7 @@ class Player
     @icon = Gosu::Image.new(@window, img, true)
     @beep = Gosu::Sample.new(window, "media/clang.wav")
     # @missle = Gosu::Sample.new(window, "media/missile.wav")
+    bounding(@x, @y, 28, 40)
   end
 
   def draw
@@ -48,19 +52,27 @@ class Player
         @angle -= 1
       end
     end
+    bounding(@x, @y, 28, 40)
   end
 
   def fire(x, y, icon)
     Bullet.new(@window, x, y, icon)
   end
 
-  def hit_by?(bullet)
-    Gosu::distance(x, y, bullet.x, bullet.y) < 15
-  end
+  # def hit_by?(bullet)
+  #   Gosu::distance(x, y, bullet.x, bullet.y) < 15
+  # end
 
   def minus_health
     @health -= 1
     @beep.play
   end
 
+  def collide?(x,y)
+    if x >= @left && x <= @right && y >= @bottom && y <= @top
+      true
+    else
+      false
+    end
+  end
 end

@@ -1,9 +1,10 @@
 require 'gosu'
 require 'pry'
 require 'date'
-require_relative 'player'
+require_relative 'lib/player'
 require_relative 'lib/keys'
-require_relative 'bullet'
+require_relative 'lib/bounding_box'
+require_relative 'lib/bullet'
 
 
 class GameWindow < Gosu::Window
@@ -38,14 +39,14 @@ class GameWindow < Gosu::Window
     end
     @bullets1.each do |bullet|
       bullet.update
-      if @player2.hit_by?(bullet)
+      if @player2.collide?(bullet.x, bullet.y)
         @player2.minus_health
       end
     end
 
     @bullets2.each do |bullet|
       bullet.update
-      if @player1.hit_by?(bullet)
+      if @player1.collide?(bullet.x, bullet.y)
         @player1.minus_health
       end
     end
@@ -65,7 +66,6 @@ class GameWindow < Gosu::Window
     # Game Over
     if @player1.health <= 0 || @player2.health <= 0
       @font.draw("GAME OVER", 250, 300, 100, 2.0, 2.0, 0xffffffff)
-
     end
   end
 end

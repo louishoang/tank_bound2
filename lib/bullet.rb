@@ -1,4 +1,6 @@
+require_relative 'bounding_box'
 class Bullet
+  include BoundingBox
   attr_accessor :x, :y
 
   def initialize(window, player, x, icon)
@@ -9,10 +11,11 @@ class Bullet
     @x = x
     @y = player.y
     @angle = player.angle
-    @power1 = 12
+    @power1 = 13
     @power = 14 #defaut 12
     @gravity = 20
     @height = 0.5
+    bounding(@x, @y, 2, 2)
   end
 
   def update
@@ -33,6 +36,7 @@ class Bullet
         @height += 0.015
       end
     end
+    bounding(@x, @y, 2, 2)
   end
 
   def draw
