@@ -18,6 +18,7 @@ class Bullet
     @gravity = 20
     @height = 0.5
     bounding(@x, @y, 2, 2)
+    @alive = true
   end
 
   def update
@@ -43,5 +44,9 @@ class Bullet
 
   def draw
     @bullet1_img.draw(@x, @y, 2)
+  end
+
+  def alive?
+    @alive == true
   end
 end

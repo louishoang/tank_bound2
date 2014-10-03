@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby -w
+
 require 'gosu'
 require 'pry'
 require 'date'
@@ -38,16 +40,18 @@ class GameWindow < Gosu::Window
       @bullets2 << @player2.fire(@player2, @player2.x - 25, "img/bullet2.png")
     end
     @bullets1.each do |bullet|
-      bullet.update
+      bullet.update if bullet.alive?
       if @player2.collide?(bullet.x, bullet.y)
         @player2.minus_health
+        @bullets1.delete(bullet)
       end
     end
 
     @bullets2.each do |bullet|
-      bullet.update
+      bullet.update if bullet.alive?
       if @player1.collide?(bullet.x, bullet.y)
         @player1.minus_health
+        @bullets2.delete(bullet)
       end
     end
   end
