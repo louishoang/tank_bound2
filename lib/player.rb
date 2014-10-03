@@ -5,10 +5,11 @@ class Player
   attr_accessor :x, :y, :angle, :m_left, :m_right, :m_rotate_up, :m_rotate_down,
                 :m_rotate_up_reversed, :m_rotate_down_reversed, :fire, :name,
                 :health
-  def initialize(window, x, y, img, name)
+  def initialize(window, x, y, img, name, adjust)
     @window = window
     @x = x
     @y = y
+    @adjust = adjust
     @name = name
     @angle = 0
     @m_right = false
@@ -19,7 +20,7 @@ class Player
     @icon = Gosu::Image.new(@window, img, true)
     @beep = Gosu::Sample.new(window, "media/clang.wav")
     # @missle = Gosu::Sample.new(window, "media/missile.wav")
-    bounding(@x, @y, 28, 40)
+    bounding(@x - 32 + @adjust, @y, 32, 40)
   end
 
   def draw
@@ -52,7 +53,7 @@ class Player
         @angle -= 1
       end
     end
-    bounding(@x, @y, 28, 40)
+    bounding(@x - 32 + @adjust, @y, 32, 40)
   end
 
   def fire(x, y, icon)

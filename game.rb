@@ -18,8 +18,8 @@ class GameWindow < Gosu::Window
   def initialize
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "TankBound"
-    @player1 = Player.new(self, 40, SCREEN_HEIGHT - 50, "img/boy.png", "player1")
-    @player2 = Player.new(self, SCREEN_WIDTH - 40, SCREEN_HEIGHT - 50, "img/girl.png", "player2")
+    @player1 = Player.new(self, 40, SCREEN_HEIGHT - 50, "img/boy.png", "player1", 0)
+    @player2 = Player.new(self, SCREEN_WIDTH - 40, SCREEN_HEIGHT - 50, "img/girl.png", "player2", 10)
     @bg_img = Gosu::Image.new(self, 'img/bg.jpg', true)
     @font = Gosu::Font.new(self, Gosu::default_font_name, 50)
     @bg_music = Gosu::Song.new(self, "media/ready.wav")
