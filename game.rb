@@ -20,7 +20,9 @@ class GameWindow < Gosu::Window
     @player1 = Player.new(self, 40, SCREEN_HEIGHT - 50, "img/boy.png", "player1")
     @player2 = Player.new(self, SCREEN_WIDTH - 40, SCREEN_HEIGHT - 50, "img/girl.png", "player2")
     @bg_img = Gosu::Image.new(self, 'img/bg.jpg', true)
-    @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
+    @font = Gosu::Font.new(self, Gosu::default_font_name, 50)
+    @bg_music = Gosu::Song.new(self, "media/ready.wav")
+    @bg_music.play(true)
     @bullets1 = []
     @bullets2 = []
   end
@@ -55,12 +57,14 @@ class GameWindow < Gosu::Window
     @player2.draw
     @bullets1.each {|bullet| bullet.draw}
     @bullets2.each {|bullet| bullet.draw}
-    @font.draw("#{player1.health}", 100, 100, 1)
-    @font.draw("#{player2.health}", 972, 100, 1)
+    @font.draw("Player 1", 30, 10, 1, 1.0, 1.0, 0xffffff00)
+    @font.draw("#{player1.health}", 60, 50, 1, 1.0, 1.0, 0xffffff00)
+    @font.draw("Player 2", 880, 10, 1, 1.0, 1.0, 0xffffff00)
+    @font.draw("#{player2.health}", 950, 50, 1, 1.0, 1.0, 0xffffff00)
 
     # Game Over
     if @player1.health <= 0 || @player2.health <= 0
-      @font.draw("GAME OVER", 300, 400, 100, 2.0, 2.0, 0xffffffff)
+      @font.draw("GAME OVER", 250, 300, 100, 2.0, 2.0, 0xffffffff)
 
     end
   end
