@@ -19,7 +19,6 @@ class Player
     @health = 100
     @icon = Gosu::Image.new(@window, img, true)
     @beep = Gosu::Sample.new(window, "media/clang.wav")
-    # @missle = Gosu::Sample.new(window, "media/missile.wav")
     bounding(@x - 32 + @adjust, @y, 32, 40)
   end
 

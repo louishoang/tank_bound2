@@ -7,6 +7,8 @@ class Bullet
     @window = window
     @bullet1_img = Gosu::Image.new(@window, icon, false)
     @bullet2_img = Gosu::Image.new(@window, icon, false)
+    @missle = Gosu::Sample.new(@window, "media/laser.wav")
+    @missle.play
     @player = player
     @x = x
     @y = player.y
