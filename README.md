@@ -10,5 +10,11 @@ Shoot: Spacebar
 Move: ArrowLeft - left, ArrowRight - right<br>
 Angle: ArrowUp - up, ArrowDown - down<br>
 Shoot: RightShift
+<h2>Play</h2>
+<ol>
+<li>Run bundle in your console or gem install gosu.</li>
+<li>Type ruby game.rb to play.</li>
+<li>Enjoy.</li>
+</ol>
 <h2>Screenshots</h2>
 <a href="http://imgur.com/WCHeY8O"><img src="http://i.imgur.com/WCHeY8O.jpg" title="Hosted by imgur.com" /></a>
