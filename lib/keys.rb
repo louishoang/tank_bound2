@@ -67,7 +67,9 @@ module Keys
 
   def reset_player
     @player1.health = 100
+    @player1.x = 40
     @player2.health = 100
+    @player2.x = 1032
   end
 
   def reset_bullet

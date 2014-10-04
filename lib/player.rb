@@ -18,7 +18,7 @@ class Player
     @m_rotate_down = false
     @health = 100
     @icon = Gosu::Image.new(@window, img, true)
-    @beep = Gosu::Sample.new(window, "media/clang.wav")
+    @beep = Gosu::Sample.new(window, "media/explosion.wav")
     bounding(@x - 32 + @adjust, @y, 32, 40)
   end
 
