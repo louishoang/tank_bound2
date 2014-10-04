@@ -23,6 +23,7 @@ class GameWindow < Gosu::Window
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "TankBound"
     @font = Gosu::Font.new(self, Gosu::default_font_name, 50)
+    @font2 = Gosu::Font.new(self, Gosu::default_font_name, 20)
     load_bullet_and_explosion
     load_image_and_sound
   end
@@ -110,6 +111,7 @@ class GameWindow < Gosu::Window
   def draw_game_over
     if @player1.health <= 0 || @player2.health <= 0
       @font.draw("GAME OVER", 250, 300, 100, 2.0, 2.0, 0xffffffff)
+      @font2.draw("Press T to restart", 375, 400, 100, 2.0, 2.0, 0xffffffff)
     end
   end
 
@@ -126,10 +128,10 @@ class GameWindow < Gosu::Window
   end
 
   def draw_font
-    @font.draw("Player 1", 30, 10, 1, 1.0, 1.0, 0xffffff00)
-    @font.draw("#{player1.health}", 60, 50, 1, 1.0, 1.0, 0xffffff00)
-    @font.draw("Player 2", 880, 10, 1, 1.0, 1.0, 0xffffff00)
-    @font.draw("#{player2.health}", 950, 50, 1, 1.0, 1.0, 0xffffff00)
+    @font.draw("Player 1", 30, 10, 1, 1.0, 1.0, 0xff0000ff)
+    @font.draw("#{player1.health}", 60, 50, 1, 1.0, 1.0, 0xff0000ff)
+    @font.draw("Player 2", 880, 10, 1, 1.0, 1.0, 0xffff0000)
+    @font.draw("#{player2.health}", 925, 50, 1, 1.0, 1.0, 0xffff0000)
     @font.draw("#{castle.health}", 500, 650, 10, 1.0, 1.0, 0xffffff00) if castle.alive?
   end
 

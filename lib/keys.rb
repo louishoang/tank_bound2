@@ -77,8 +77,10 @@ module Keys
   def reset_player
     @player1.health = 100
     @player1.x = 40
+    @player1.angle = 0
     @player2.health = 100
     @player2.x = 1032
+    @player2.angle = 0
   end
 
   def reset_bullet

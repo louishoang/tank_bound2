@@ -8,7 +8,7 @@ class Castle
     @y = y
     @icon = Gosu::Image.new(@window, "img/castle.png", true)
     bounding(@x + 100, @y + 75, 250, 200)
-    @health = 1000
+    @health = 900
     @beep = Gosu::Sample.new(window, "media/explosion.wav")
     @hit = 0
   end
