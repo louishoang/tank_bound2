@@ -37,19 +37,19 @@ class Player
         @x += 1
       end
     elsif m_rotate_up
-      if @angle <= 0 && @angle > -90
+      if @angle <= 91 && @angle > -90
         @angle -= 1
       end
     elsif m_rotate_down
-      if @angle <= -1 && @angle >= -91
+      if @angle <= 90 && @angle >= -91
         @angle += 1
       end
     elsif m_rotate_up_reversed
-      if @angle >= -1 && @angle <= 90
+      if @angle >= -91 && @angle <= 90
         @angle += 1
       end
     elsif m_rotate_down_reversed
-      if @angle > 0 && @angle <= 91
+      if @angle > -90 && @angle <= 91
         @angle -= 1
       end
     end

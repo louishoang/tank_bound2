@@ -17,7 +17,7 @@ class Bullet
     @power = 14 #defaut 12
     @gravity = 20
     @height = 0.5
-    bounding(@x, @y, 2, 2)
+    bounding(@x, @y, 5, 5)
     @alive = true
   end
 
@@ -39,7 +39,7 @@ class Bullet
         @height += 0.015
       end
     end
-    bounding(@x, @y, 2, 2)
+    bounding(@x, @y, 5, 5)
   end
 
   def draw
@@ -51,6 +51,7 @@ class Bullet
   end
 
   def explode(pos_x, pos_y)
+    binding.pry
     Explosion.new(@window, pos_x, pos_y)
   end
 end

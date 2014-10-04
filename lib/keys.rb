@@ -106,7 +106,7 @@ module Keys
 
   def reset_castle
     @castle.y = 470
-    @castle.health = 1000
+    @castle.health = 900
     @castle.hit = 0
   end
 end
