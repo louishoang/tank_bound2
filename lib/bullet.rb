@@ -51,7 +51,6 @@ class Bullet
   end
 
   def explode(pos_x, pos_y)
-    binding.pry
     Explosion.new(@window, pos_x, pos_y)
   end
 end
