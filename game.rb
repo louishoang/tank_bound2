@@ -22,9 +22,7 @@ class GameWindow < Gosu::Window
     super(SCREEN_WIDTH, SCREEN_HEIGHT, false)
     self.caption = "TankBound"
     @font = Gosu::Font.new(self, Gosu::default_font_name, 50)
-    @bullets1 = []
-    @bullets2 = []
-    @booms = []
+    load_bullet_and_explosion
     load_image_and_sound
   end
 
@@ -32,49 +30,85 @@ class GameWindow < Gosu::Window
     if playing
       @player1.update
       @player2.update
-      if button_down? Gosu::Button::KbSpace
-        @bullets1 << @player1.fire(@player1, @player1.x + 6, "img/bullet1.png")
-      end
-      if button_down? Gosu::Button::KbRightShift
-        @bullets2 << @player2.fire(@player2, @player2.x - 25, "img/bullet2.png")
-      end
-      @bullets1.each do |bullet|
-        bullet.update if bullet.alive?
-        if @player2.collide?(bullet.x, bullet.y)
-          @player2.minus_health
-          @booms << bullet.explode(bullet.x , bullet.y )
-          @bullets1.delete(bullet)
-        end
-      end
-
-      @bullets2.each do |bullet|
-        bullet.update if bullet.alive?
-        if @player1.collide?(bullet.x, bullet.y)
-          @player1.minus_health
-          @booms << bullet.explode(bullet.x , bullet.y )
-          @bullets2.delete(bullet)
-        end
-      end
+      press_and_hold_button
+      player1_bullet
+      player2_bullet
+      bomb_explosion
     end
-
   end
 
   def draw
-    @bg_img.draw(0, 0, 0)
-    @player1.draw
-    @player2.draw
-    draw_helper
+    drawer_main_character
+    draw_motion
+    draw_font
+    draw_game_over
+  end
 
-    # Game Over
+  def load_bullet_and_explosion
+    @bullets1 = []
+    @bullets2 = []
+    @booms = []
+  end
+
+  def bomb_explosion
+    @booms.each do |boom|
+      boom.update
+      if boom.time == 0
+        @booms.delete(boom)
+      end
+    end
+  end
+
+  def player2_bullet
+    @bullets2.each do |bullet|
+      bullet.update if bullet.alive?
+      if @player1.collide?(bullet.x, bullet.y)
+        @player1.minus_health
+        @booms << bullet.explode(@player1.x , @player1.y )
+        @bullets2.delete(bullet)
+      end
+    end
+  end
+
+  def player1_bullet
+    @bullets1.each do |bullet|
+      bullet.update if bullet.alive?
+      if @player2.collide?(bullet.x, bullet.y)
+        @player2.minus_health
+        @booms << bullet.explode(@player2.x , @player2.y)
+        @bullets1.delete(bullet)
+      end
+    end
+  end
+
+  def press_and_hold_button
+    if button_down? Gosu::Button::KbSpace
+      @bullets1 << @player1.fire(@player1, @player1.x + 6, "img/bullet1.png")
+    end
+    if button_down? Gosu::Button::KbRightShift
+      @bullets2 << @player2.fire(@player2, @player2.x - 25, "img/bullet2.png")
+    end
+  end
+
+  def draw_game_over
     if @player1.health <= 0 || @player2.health <= 0
       @font.draw("GAME OVER", 250, 300, 100, 2.0, 2.0, 0xffffffff)
     end
   end
 
-  def draw_helper
+  def drawer_main_character
+    @bg_img.draw(0, 0, 0)
+    @player1.draw
+    @player2.draw
+  end
+
+  def draw_motion
     @booms.each {|boom| boom.draw}
     @bullets1.each {|bullet| bullet.draw}
     @bullets2.each {|bullet| bullet.draw}
+  end
+
+  def draw_font
     @font.draw("Player 1", 30, 10, 1, 1.0, 1.0, 0xffffff00)
     @font.draw("#{player1.health}", 60, 50, 1, 1.0, 1.0, 0xffffff00)
     @font.draw("Player 2", 880, 10, 1, 1.0, 1.0, 0xffffff00)

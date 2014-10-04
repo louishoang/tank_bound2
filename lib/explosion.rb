@@ -1,16 +1,18 @@
 class Explosion
+  attr_accessor :time, :x, :y
   def initialize(window, x, y)
     @window = window
     @x = x
     @y = y
-    @boom = Gosu::Image.new(@window, "img/boom.png", true)
+    @bomb = Gosu::Image.new(@window, "img/boom.png", true)
+    @time = 2
   end
 
   def update
-    @boom.update
+    @time -= 1
   end
 
   def draw
-    @boom.draw(@x, @y, 2)
+    @bomb.draw(x, y, 2)
   end
 end

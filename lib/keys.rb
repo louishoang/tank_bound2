@@ -10,8 +10,7 @@ module Keys
       @player1.m_rotate_up = true
     elsif id == Gosu::KbS
       @player1.m_rotate_down = true
-    # elsif id == Gosu::KbSpace
-    #   @bullets1 << @player1.fire(@player1, @player1.x + 6, "img/bullet1.png")
+
     # Button for player_2(girl)
     elsif id == Gosu::KbLeft
       @player2.m_left = true
@@ -22,8 +21,10 @@ module Keys
       @position = "right"
     elsif id == Gosu::KbDown
       @player2.m_rotate_down_reversed = true
-    # elsif id == Gosu::KbRightShift
-    #   @bullets2 << @player2.fire(@player2, @player2.x - 25, "img/bullet2.png")
+
+    # Button for main game
+    elsif id == Gosu::KbT
+      reset_game
     end
   end
 
@@ -47,6 +48,46 @@ module Keys
       @player2.m_rotate_up_reversed = false
     elsif id == Gosu::KbDown
       @player2.m_rotate_down_reversed = false
+    end
+  end
+
+  def reset_game
+    reset_player
+    reset_bullet
+    delete_explosion
+  end
+
+  def delete_explosion
+    while @booms.size > 0
+      @booms.each do |boom|
+        @booms.delete(boom)
+      end
+    end
+  end
+
+  def reset_player
+    @player1.health = 100
+    @player2.health = 100
+  end
+
+  def reset_bullet
+    reset_player1_bullet
+    reset_player2_bullet
+  end
+
+  def reset_player1_bullet
+    while @bullets1.size > 0
+      @bullets1.each do |bullet|
+        @bullets1.delete(bullet)
+      end
+    end
+  end
+
+  def reset_player2_bullet
+    while @bullets2.size > 0
+      @bullets2.each do |bullet|
+        @bullets2.delete(bullet)
+      end
     end
   end
 
