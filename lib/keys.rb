@@ -1,5 +1,4 @@
 module Keys
-
   def button_down(id)
     # Button for player_1(boy)
     if id == Gosu::KbA

@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby -w
-
 require 'gosu'
 require 'pry'
 require 'date'
@@ -9,7 +8,6 @@ require_relative 'lib/bounding_box'
 require_relative 'lib/bullet'
 require_relative 'lib/explosion'
 require_relative 'lib/castle'
-
 
 class GameWindow < Gosu::Window
 
@@ -45,9 +43,7 @@ class GameWindow < Gosu::Window
     draw_motion
     draw_font
     draw_game_over
-    if castle.alive?
-      castle.draw
-    end
+    draw_castle
   end
 
   def load_bullet_and_explosion
@@ -64,7 +60,6 @@ class GameWindow < Gosu::Window
       end
     end
   end
-
 
   def player2_bullet
     @bullets2.each do |bullet|
@@ -95,7 +90,6 @@ class GameWindow < Gosu::Window
         @booms << bullet.explode(bullet.x , bullet.y)
         @bullets1.delete(bullet)
       end
-
     end
   end
 
@@ -112,6 +106,12 @@ class GameWindow < Gosu::Window
     if @player1.health <= 0 || @player2.health <= 0
       @font.draw("GAME OVER", 250, 300, 100, 2.0, 2.0, 0xffffffff)
       @font2.draw("Press T to restart", 375, 400, 100, 2.0, 2.0, 0xffffffff)
+    end
+  end
+
+  def draw_castle
+    if castle.alive?
+      castle.draw
     end
   end
 

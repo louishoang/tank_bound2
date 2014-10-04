@@ -2,25 +2,21 @@ require_relative 'bounding_box'
 require_relative 'castle'
 
 class Player
+
   include BoundingBox
   attr_accessor :x, :y, :angle, :m_left, :m_right, :m_rotate_up, :m_rotate_down,
                 :m_rotate_up_reversed, :m_rotate_down_reversed, :fire, :name,
                 :health
+
   def initialize(window, x, y, img, name, adjust)
     @window = window
     @x = x
     @y = y
-    @adjust = adjust
-    @name = name
-    @angle = 0
-    @m_right = false
-    @m_left = false
-    @m_rotate_up = false
-    @m_rotate_down = false
-    @health = 100
+    initialize_player_character
+    initialize_movement
+    bounding(@x - 32 + @adjust, @y, 45, 45)
     @icon = Gosu::Image.new(@window, img, true)
     @beep = Gosu::Sample.new(window, "media/explosion.wav")
-    bounding(@x - 32 + @adjust, @y, 45, 45)
   end
 
   def draw
@@ -53,16 +49,27 @@ class Player
         @angle -= 1
       end
     end
+
     bounding(@x - 32 + @adjust, @y, 45, 45)
+  end
+
+  def initialize_player_character
+    @adjust = adjust
+    @name = name
+    @angle = 0
+    @health = 100
+  end
+
+  def initialize_movement
+    @m_right = false
+    @m_left = false
+    @m_rotate_up = false
+    @m_rotate_down = false
   end
 
   def fire(x, y, icon)
     Bullet.new(@window, x, y, icon)
   end
-
-  # def hit_by?(bullet)
-  #   Gosu::distance(x, y, bullet.x, bullet.y) < 15
-  # end
 
   def minus_health
     @health -= 1
