@@ -1,3 +1,3 @@
 tank_bound2
 ===========
-[Imgur](http://i.imgur.com/WCHeY8O.jpg)
+<a href="http://imgur.com/WCHeY8O"><img src="http://i.imgur.com/WCHeY8O.jpg" title="Hosted by imgur.com" /></a>
