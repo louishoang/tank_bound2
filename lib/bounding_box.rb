@@ -9,5 +9,12 @@ module BoundingBox
 
     @right = @left + @width
     @top = @bottom + @height
+
+    # @icon = Gosu::Image.new(@window, "img/blue.jpg", true)
   end
+
+  def draw
+    # @icon.draw(@left, @bottom)
+  end
+
 end

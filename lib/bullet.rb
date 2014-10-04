@@ -43,7 +43,7 @@ class Bullet
   end
 
   def draw
-    @bullet1_img.draw(@x, @y, 2)
+    @bullet1_img.draw(@x, @y, 10)
   end
 
   def alive?

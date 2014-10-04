@@ -13,6 +13,6 @@ class Explosion
   end
 
   def draw
-    @bomb.draw(x, y, 2)
+    @bomb.draw(x, y, 10)
   end
 end

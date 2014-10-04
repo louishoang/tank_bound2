@@ -19,7 +19,7 @@ class Player
     @health = 100
     @icon = Gosu::Image.new(@window, img, true)
     @beep = Gosu::Sample.new(window, "media/explosion.wav")
-    bounding(@x - 32 + @adjust, @y, 32, 40)
+    bounding(@x - 32 + @adjust, @y, 45, 45)
   end
 
   def draw
@@ -52,7 +52,7 @@ class Player
         @angle -= 1
       end
     end
-    bounding(@x - 32 + @adjust, @y, 32, 40)
+    bounding(@x - 32 + @adjust, @y, 45, 45)
   end
 
   def fire(x, y, icon)

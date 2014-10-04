@@ -8,6 +8,7 @@ require_relative 'lib/keys'
 require_relative 'lib/bounding_box'
 require_relative 'lib/bullet'
 require_relative 'lib/explosion'
+require_relative 'lib/castle'
 
 
 class GameWindow < Gosu::Window
@@ -15,7 +16,7 @@ class GameWindow < Gosu::Window
   SCREEN_WIDTH = 1072
   SCREEN_HEIGHT = 720
 
-  attr_accessor :player1, :player2, :width
+  attr_accessor :player1, :player2, :width, :castle
   include Keys
 
   def initialize
@@ -34,6 +35,7 @@ class GameWindow < Gosu::Window
       player1_bullet
       player2_bullet
       bomb_explosion
+      @castle.update
     end
   end
 
@@ -42,6 +44,9 @@ class GameWindow < Gosu::Window
     draw_motion
     draw_font
     draw_game_over
+    if castle.alive?
+      castle.draw
+    end
   end
 
   def load_bullet_and_explosion
@@ -59,12 +64,18 @@ class GameWindow < Gosu::Window
     end
   end
 
+
   def player2_bullet
     @bullets2.each do |bullet|
       bullet.update if bullet.alive?
       if @player1.collide?(bullet.x, bullet.y)
         @player1.minus_health
         @booms << bullet.explode(@player1.x , @player1.y )
+        @bullets2.delete(bullet)
+      elsif
+        @castle.collide?(bullet.x, bullet.y)
+        @castle.minus_health
+        @booms << bullet.explode(bullet.x , bullet.y)
         @bullets2.delete(bullet)
       end
     end
@@ -77,7 +88,13 @@ class GameWindow < Gosu::Window
         @player2.minus_health
         @booms << bullet.explode(@player2.x , @player2.y)
         @bullets1.delete(bullet)
+      elsif
+        @castle.collide?(bullet.x, bullet.y)
+        @castle.minus_health
+        @booms << bullet.explode(bullet.x , bullet.y)
+        @bullets1.delete(bullet)
       end
+
     end
   end
 
@@ -113,11 +130,13 @@ class GameWindow < Gosu::Window
     @font.draw("#{player1.health}", 60, 50, 1, 1.0, 1.0, 0xffffff00)
     @font.draw("Player 2", 880, 10, 1, 1.0, 1.0, 0xffffff00)
     @font.draw("#{player2.health}", 950, 50, 1, 1.0, 1.0, 0xffffff00)
+    @font.draw("#{castle.health}", 500, 650, 10, 1.0, 1.0, 0xffffff00) if castle.alive?
   end
 
   def load_image_and_sound
     @player1 = Player.new(self, 40, SCREEN_HEIGHT - 50, "img/boy.png", "player1", 0)
     @player2 = Player.new(self, SCREEN_WIDTH - 40, SCREEN_HEIGHT - 50, "img/girl.png", "player2", 10)
+    @castle = Castle.new(self, 300, 470)
     @bg_img = Gosu::Image.new(self, 'img/bg.jpg', true)
     @bg_music = Gosu::Song.new(self, "media/ready.wav")
     @bg_music.play(true)
