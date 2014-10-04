@@ -9,10 +9,13 @@ class Player
                 :health
 
   def initialize(window, x, y, img, name, adjust)
+    @adjust = adjust
+    @name = name
+    @angle = 0
+    @health = 100
     @window = window
     @x = x
     @y = y
-    initialize_player_character
     initialize_movement
     bounding(@x - 32 + @adjust, @y, 45, 45)
     @icon = Gosu::Image.new(@window, img, true)
@@ -51,13 +54,6 @@ class Player
     end
 
     bounding(@x - 32 + @adjust, @y, 45, 45)
-  end
-
-  def initialize_player_character
-    @adjust = adjust
-    @name = name
-    @angle = 0
-    @health = 100
   end
 
   def initialize_movement

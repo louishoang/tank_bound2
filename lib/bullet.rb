@@ -14,7 +14,7 @@ class Bullet
     @y = player.y
     @angle = player.angle
     @power1 = 13
-    @power = 14 #defaut 12
+    @power = 17 #defaut 12 for girl
     @gravity = 20
     @height = 0.5
     bounding(@x, @y, 5, 5)
@@ -33,7 +33,7 @@ class Bullet
     else
       if @power > 0
         @x -= @power + (@angle * 0.01)
-        @y += (-(@gravity / 2) + @power * (-@angle * 0.007)) + @height
+        @y += (-(@gravity) + @power * (-@angle * 0.007)) + @height
         @power -= 0.01
         @gravity -= 1
         @height += 0.015
