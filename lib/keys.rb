@@ -5,7 +5,7 @@ module Keys
     if id == Gosu::KbA
       @player1.m_left = true
     elsif id == Gosu::KbD
-      if @castle.alive? && @player1.x < 300
+      if @castle.alive? && @player1.x < 300 + @castle.hit * 1000
         @player1.m_right = true
       elsif !@castle.alive?
         @player1.m_right = true
@@ -17,7 +17,7 @@ module Keys
 
     # Button for player_2(girl)
     elsif id == Gosu::KbLeft
-      if @castle.alive? && @player2.x > 800
+      if @castle.alive? && @player2.x > 800 - @castle.hit * 1000
         @player2.m_left = true
       elsif !@castle.alive?
         @player2.m_left = true
@@ -63,6 +63,7 @@ module Keys
     reset_player
     reset_bullet
     delete_explosion
+    reset_castle
   end
 
   def delete_explosion
@@ -101,4 +102,9 @@ module Keys
     end
   end
 
+  def reset_castle
+    @castle.y = 470
+    @castle.health = 1000
+    @castle.hit = 0
+  end
 end
