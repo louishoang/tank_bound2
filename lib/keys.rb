@@ -5,7 +5,11 @@ module Keys
     if id == Gosu::KbA
       @player1.m_left = true
     elsif id == Gosu::KbD
-      @player1.m_right = true
+      if @castle.alive? && @player1.x < 300
+        @player1.m_right = true
+      elsif !@castle.alive?
+        @player1.m_right = true
+      end
     elsif id == Gosu::KbW
       @player1.m_rotate_up = true
     elsif id == Gosu::KbS
@@ -13,9 +17,13 @@ module Keys
 
     # Button for player_2(girl)
     elsif id == Gosu::KbLeft
-      @player2.m_left = true
+      if @castle.alive? && @player2.x > 800
+        @player2.m_left = true
+      elsif !@castle.alive?
+        @player2.m_left = true
+      end
     elsif id == Gosu::KbRight
-      @player2.m_right = true
+        @player2.m_right = true
     elsif id == Gosu::KbUp
       @player2.m_rotate_up_reversed = true
       @position = "right"

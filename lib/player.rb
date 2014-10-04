@@ -1,4 +1,5 @@
 require_relative 'bounding_box'
+require_relative 'castle'
 
 class Player
   include BoundingBox
